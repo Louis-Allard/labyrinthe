@@ -122,7 +122,7 @@ class Room3(Room):
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode([800, 600])
+    screen = pygame.display.set_mode([800,600])
     pygame.display.set_caption('Maze Runner')
     player = Player(50, 50)
     movingsprites = pygame.sprite.Group()
@@ -162,41 +162,41 @@ def main():
                 if event.type == pygame.K_DOWN:
                     player.changespeed(0, -5)
 #walls and pieces
-    player.move(current_room.wall_list)
+        player.move(current_room.wall_list)
 
-    if player.rect.x < -15:
-        if current_room_no == 0:
-            current_room_no = 2
-            current_room = rooms[current_room_no]
-            player.rect.x = 790
-        elif current_room_no == 2:
-            current_room_no = 1
-            current_room = rooms[current_room_no]
-            player.rect.x = 790
-        else:
-            current_room_no = 0
-            current_room = rooms[current_room_no]
-            player.rect.x = 790
-            
-    if player.rect.x > 801:
-        if current_room_no == 0:
-            current_room_no = 1
-            current_room = rooms[current_room_no]
-            player.rect.x = 0
-        elif current_room_no == 1:
-            current_room_no = 2
-            current_room = rooms[current_room_no]
-            player.rect.x = 0
-        else:
-            current_room_no = 0
-            current_room = rooms[current_room_no]
-            player.rect.x = 0
-# renonce
-    screen.fill(BLACK)
-    movingsprites.draw(screen)
-    current_room.wall_list.draw(screen)
-    pygame.display.flip()
-    clock.tick(60)
+        if player.rect.x < -15:
+            if current_room_no == 0:
+                current_room_no = 2
+                current_room = rooms[current_room_no]
+                player.rect.x = 790
+            elif current_room_no == 2:
+                current_room_no = 1
+                current_room = rooms[current_room_no]
+                player.rect.x = 790
+            else:
+                current_room_no = 0
+                current_room = rooms[current_room_no]
+                player.rect.x = 790
+
+        if player.rect.x > 801:
+            if current_room_no == 0:
+                current_room_no = 1
+                current_room = rooms[current_room_no]
+                player.rect.x = 0
+            elif current_room_no == 1:
+                current_room_no = 2
+                current_room = rooms[current_room_no]
+                player.rect.x = 0
+            else:
+                current_room_no = 0
+                current_room = rooms[current_room_no]
+                player.rect.x = 0
+    # renonciation clause
+        screen.fill(BLACK)
+        movingsprites.draw(screen)
+        current_room.wall_list.draw(screen)
+        pygame.display.flip()
+        clock.tick(60)
     pygame.quit()
 
 
