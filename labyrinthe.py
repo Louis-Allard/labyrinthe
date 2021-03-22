@@ -122,7 +122,7 @@ class Room3(Room):
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode([800,600])
+    screen = pygame.display.set_mode((800,600))
     pygame.display.set_caption('Maze Runner')
     player = Player(50, 50)
     movingsprites = pygame.sprite.Group()
@@ -144,22 +144,22 @@ def main():
             if event.type == pygame.QUIT:
                 done = True
             if event.type == pygame.KEYDOWN:
-                if event.type == pygame.K_LEFT:
+                if event.key == pygame.K_LEFT:
                     player.changespeed(-5, 0)
-                if event.type == pygame.K_RIGHT:
+                if event.key == pygame.K_RIGHT:
                     player.changespeed(5, 0)
-                if event.type == pygame.K_UP:
+                if event.key == pygame.K_UP:
                     player.changespeed(0, -5)
-                if event.type == pygame.K_DOWN:
+                if event.key == pygame.K_DOWN:
                     player.changespeed(0, 5)
             if event.type == pygame.KEYUP:
-                if event.type == pygame.K_LEFT:
+                if event.key == pygame.K_LEFT:
                     player.changespeed(5, 0)
-                if event.type == pygame.K_RIGHT:
+                if event.key == pygame.K_RIGHT:
                     player.changespeed(-5, 0)
-                if event.type == pygame.K_UP:
+                if event.key == pygame.K_UP:
                     player.changespeed(0, 5)
-                if event.type == pygame.K_DOWN:
+                if event.key == pygame.K_DOWN:
                     player.changespeed(0, -5)
 #walls and pieces
         player.move(current_room.wall_list)
@@ -198,7 +198,6 @@ def main():
         pygame.display.flip()
         clock.tick(60)
     pygame.quit()
-
 
 if __name__ == "__main__":
     main()
