@@ -124,6 +124,8 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((800,600))
     pygame.display.set_caption('Maze Runner')
+    bg = pygame.image.load("bg.jpg").convert()
+    screen.blit(bg, (0,0))
     player = Player(50, 50)
     movingsprites = pygame.sprite.Group()
     movingsprites.add(player)
@@ -192,7 +194,7 @@ def main():
                 current_room = rooms[current_room_no]
                 player.rect.x = 0
     # renonciation clause
-        screen.fill(BLACK)
+        #screen.fill(BLACK)
         movingsprites.draw(screen)
         current_room.wall_list.draw(screen)
         pygame.display.flip()
