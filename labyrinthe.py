@@ -68,9 +68,8 @@ class Room(object):
     def __init__(self):
         self.wall_list = pygame.sprite.Group()
         self.enemy_sprites = pygame.sprite.Group()
+
 # Levels
-
-
 class Room1(Room):
     def __init__(self):
         super().__init__()
@@ -93,8 +92,10 @@ class Room2(Room):
                  [0, 350, 20, 250, RED],
                  [780, 0, 20, 250, RED],
                  [780, 350, 20, 250, RED],
-                 [190, 50, 20, 500, GREEN],
-                 [590, 50, 20, 500, GREEN]
+                 [20, 0, 760, 20, RED],
+                 [20, 580, 760, 20, RED],
+                 [190, 30, 20, 500, GREEN],
+                 [590, 50, 20, 520, GREEN]
                  ]
         for item in walls:
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
@@ -115,7 +116,7 @@ class Room3(Room):
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wall_list.add(wall)
         for x in range(100, 800, 100):
-            for y in range(50, 451, 300):
+            for y in range(30, 451, 300):
                 wall = Wall(x, y, 20, 200, RED)
                 self.wall_list.add(wall)
         for x in range(150, 700, 100):
@@ -124,10 +125,12 @@ class Room3(Room):
 
 def main():
     pygame.init()
+    print("Welcome to the Maze Runner ! Please install python and pygame first.")
+    print("Contact me on ladevweb@yahoo.com")
     screen = pygame.display.set_mode((800,600))
     pygame.display.set_caption('Maze Runner')
-    bg = pygame.image.load("bg.jpg").convert()
-    screen.blit(bg, (0,0))
+    #bg = pygame.image.load("bg.jpg").convert()
+    #screen.blit(bg, (0,0))
     player = Player(50, 50)
     movingsprites = pygame.sprite.Group()
     movingsprites.add(player)
@@ -196,7 +199,7 @@ def main():
                 current_room = rooms[current_room_no]
                 player.rect.x = 0
     # renonciation clause
-        #screen.fill(BLACK)
+        screen.fill(BLACK)
         movingsprites.draw(screen)
         current_room.wall_list.draw(screen)
         pygame.display.flip()
