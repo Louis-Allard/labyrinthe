@@ -1,6 +1,5 @@
 import pygame
 
-# Initialize variables
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
@@ -8,9 +7,6 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 PURPLE = (255, 0, 255)
 PERSO = (64, 119, 112)
-
-# Wall class
-
 
 class Wall(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height, colour):
@@ -38,11 +34,9 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.y = y
         self.rect.x = x
-
     def changespeed(self, x, y):
         self.change_x += x
         self.change_y += y
-
     def move(self, walls):
         self.rect.x += self.change_x
         block_hit_list = pygame.sprite.spritecollide(self, walls, False)
@@ -60,7 +54,6 @@ class Player(pygame.sprite.Sprite):
                 self.rect.top = block.rect.bottom
 
 # Parent class
-
 
 class Room(object):
     wall_list = None
