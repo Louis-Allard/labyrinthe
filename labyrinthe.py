@@ -7,6 +7,7 @@ BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 PURPLE = (255, 0, 255)
+PERSO = (64, 119, 112)
 
 # Wall class
 
@@ -33,7 +34,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
         self.image = pygame.Surface([15, 15])
-        self.image.fill(WHITE)
+        self.image.fill(PERSO)
         self.rect = self.image.get_rect()
         self.rect.y = y
         self.rect.x = x
@@ -78,6 +79,7 @@ class Room1(Room):
                  [780, 0, 20, 250, WHITE],
                  [780, 350, 20, 250, WHITE],
                  [20, 0, 760, 20, WHITE],
+                 [20, 580, 760, 20, WHITE],
                  [390, 50, 20, 500, BLUE]
                  ]
         for item in walls:
