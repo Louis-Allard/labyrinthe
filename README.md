@@ -7,4 +7,6 @@ Run on Python3 with pygame.
 
 ***
 
+Improve sprites.
+
 
