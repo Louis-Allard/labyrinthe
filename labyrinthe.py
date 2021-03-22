@@ -8,6 +8,18 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 PURPLE = (255, 0, 255)
 
+# Wall class
+
+
+class Wall(pygame.sprite.Sprite):
+    def __init__(self, x, y, width, height, colour):
+        super().__init__()
+        self.image = pygame.Surface([width, height])
+        self.image.fill(colour)
+        self.rect = self.image.get_rect()
+        self.rect.y = y
+        self.rect.x = x
+
 # Player class
 # changespeed to change the player speed while it's progress
 # move to move the player
@@ -16,7 +28,6 @@ PURPLE = (255, 0, 255)
 class Player(pygame.sprite.Sprite):
     change_x = 0
     change_y = 0
-
 # Create the rectangle
 
     def __init__(self, x, y):
@@ -47,29 +58,15 @@ class Player(pygame.sprite.Sprite):
             else:
                 self.rect.top = block.rect.bottom
 
-# Wall class
-
-
-class Wall(pygame.sprite.Sprite):
-    def __init__(self, x, y, width, height, colour):
-        super().__init__()
-        self.image = pygame.Surface([width, height])
-        self.image.fill(colour)
-        self.rect = self.image.get_rect()
-        self.rect.y = y
-        self.rect.x = x
-
 # Parent class
 
 
 class Room(object):
     wall_list = None
     enemy_sprites = None
-
     def __init__(self):
         self.wall_list = pygame.sprite.Group()
         self.enemy_sprites = pygame.sprite.Group()
-
 # Levels
 
 
@@ -86,7 +83,6 @@ class Room1(Room):
         for item in walls:
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wall_list.add(wall)
-
 
 class Room2(Room):
     def __init__(self):
@@ -123,7 +119,6 @@ class Room3(Room):
         for x in range(150, 700, 100):
             wall = Wall(x, 200, 20, 200, WHITE)
             self.wall_list.add(wall)
-
 
 def main():
     pygame.init()
@@ -182,6 +177,7 @@ def main():
             current_room_no = 0
             current_room = rooms[current_room_no]
             player.rect.x = 790
+            
     if player.rect.x > 801:
         if current_room_no == 0:
             current_room_no = 1
