@@ -23,11 +23,30 @@ class Wall(pygame.sprite.Sprite):
 # changespeed to change the player speed while it's progress
 # move to move the player
 
-def Player2(pp_x,pp_y,img,screen):
-    screen.blit(img,(pp_x,pp_y))
+class Player2(pygame.sprite.Sprite):
+    move_ppx = 0
+    move_ppy = 0
+    def changespeed(self,pp_x,pp_y):
+        self.move_ppx += pp_x
+        self.move_ppy += pp_y
+    def move(self, walls):
+        self.rect.pp_x += self.move_ppx
+        block_hit_list = pygame.sprite.spritecollide(self, walls, False)
+        for block in block_hit_list:
+            if self.move_ppx > 0:
+                self.rect.right = block.rect.left
+            else:
+                self.rect.left = block.rect.right
+        self.rect.pp_y += self.move_ppx
+        block_hit_list = pygame.sprite.spritecollide(self, walls, False)
+        for block in block_hit_list:
+            if self.move__ppy > 0:
+                self.rect.bottom = block.rect.top
+            else:
+                self.rect.top = block.rect.bottom        
 
 
-class Player(pygame.sprite.Sprite):
+""" class Player(pygame.sprite.Sprite):
     change_x = 0
     change_y = 0
 # Create the rectangle
@@ -56,7 +75,7 @@ class Player(pygame.sprite.Sprite):
             if self.change_y > 0:
                 self.rect.bottom = block.rect.top
             else:
-                self.rect.top = block.rect.bottom
+                self.rect.top = block.rect.bottom """
 
 # Parent class
 
@@ -132,14 +151,16 @@ def main():
     pygame.display.set_caption('Maze Runner')
     bg = pygame.image.load("./sprites/bg.jpg").convert()
     screen.blit(bg, (0,0))
-    player = Player(50, 50)
+    #player = Player(50, 50)
 #player2
     pp_x = 150
     pp_y = 200
     img = pygame.image.load("./sprites/sprite.png")
+    player2 = Player2(pp_x,pp_y,img,screen)
+    screen.blit(img,(pp_x,pp_y))
 ##    
     movingsprites = pygame.sprite.Group()
-    movingsprites.add(player)
+    movingsprites.add(player2)
     rooms = []
     room = Room1()
     rooms.append(room)
@@ -158,52 +179,52 @@ def main():
                 done = True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    player.changespeed(-5, 0)
+                    player2.changespeed(-5, 0)
                 if event.key == pygame.K_RIGHT:
-                    player.changespeed(5, 0)
+                    player2.changespeed(5, 0)
                 if event.key == pygame.K_UP:
-                    player.changespeed(0, -5)
+                    player2.changespeed(0, -5)
                 if event.key == pygame.K_DOWN:
-                    player.changespeed(0, 5)
+                    player2.changespeed(0, 5)
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
-                    player.changespeed(5, 0)
+                    player2.changespeed(5, 0)
                 if event.key == pygame.K_RIGHT:
-                    player.changespeed(-5, 0)
+                    player2.changespeed(-5, 0)
                 if event.key == pygame.K_UP:
-                    player.changespeed(0, 5)
+                    player2.changespeed(0, 5)
                 if event.key == pygame.K_DOWN:
-                    player.changespeed(0, -5)
+                    player2.changespeed(0, -5)
 #walls and pieces
-        player.move(current_room.wall_list)
+        player2.move(current_room.wall_list)
 
-        if player.rect.x < -15:
+        if player2.rect.ppx < -15:
             if current_room_no == 0:
                 current_room_no = 2
                 current_room = rooms[current_room_no]
-                player.rect.x = 790
+                player2.rect.ppx = 790
             elif current_room_no == 2:
                 current_room_no = 1
                 current_room = rooms[current_room_no]
-                player.rect.x = 790
+                player2.rect.ppx = 790
             else:
                 current_room_no = 0
                 current_room = rooms[current_room_no]
-                player.rect.x = 790
+                player2.rect.ppx = 790
 
-        if player.rect.x > 801:
+        if player2.rect.ppx > 801:
             if current_room_no == 0:
                 current_room_no = 1
                 current_room = rooms[current_room_no]
-                player.rect.x = 0
+                player2.rect.ppx = 0
             elif current_room_no == 1:
                 current_room_no = 2
                 current_room = rooms[current_room_no]
-                player.rect.x = 0
+                player2.rect.ppx = 0
             else:
                 current_room_no = 0
                 current_room = rooms[current_room_no]
-                player.rect.x = 0
+                player2.rect.ppx = 0
     # renonciation clause
         rect = bg.get_rect()
         screen.fill(BLACK)
