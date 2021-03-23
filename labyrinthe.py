@@ -7,6 +7,8 @@ GREEN = (0,255,0)
 RED = (255,0,0)
 PURPLE = (255,0,255)
 PERSO = (255,215,0)
+player_x = 67
+player_y = 92
 
 class Wall(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height, colour):
@@ -20,6 +22,9 @@ class Wall(pygame.sprite.Sprite):
 # Player class
 # changespeed to change the player speed while it's progress
 # move to move the player
+
+def Player2(pp_x,pp_y,img,screen):
+    screen.blit(img,(pp_x,pp_y))
 
 
 class Player(pygame.sprite.Sprite):
@@ -128,6 +133,11 @@ def main():
     bg = pygame.image.load("./sprites/bg.jpg").convert()
     screen.blit(bg, (0,0))
     player = Player(50, 50)
+#player2
+    pp_x = 150
+    pp_y = 200
+    img = pygame.image.load("./sprites/sprite.png")
+##    
     movingsprites = pygame.sprite.Group()
     movingsprites.add(player)
     rooms = []
@@ -198,6 +208,7 @@ def main():
         rect = bg.get_rect()
         screen.fill(BLACK)
         screen.blit(bg, rect)
+        Player2(pp_x,pp_y,img,screen)
         pygame.draw.rect(screen, RED, rect, 1)
         movingsprites.draw(screen)
         current_room.wall_list.draw(screen)
