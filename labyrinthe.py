@@ -1,12 +1,12 @@
 import pygame
 
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-BLUE = (0, 0, 255)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
-PURPLE = (255, 0, 255)
-PERSO = (64, 119, 112)
+BLACK = (0,0,0)
+WHITE = (255,255,255)
+BLUE = (0,0,255)
+GREEN = (0,255,0)
+RED = (255,0,0)
+PURPLE = (255,0,255)
+PERSO = (255,215,0)
 
 class Wall(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height, colour):
@@ -94,7 +94,6 @@ class Room2(Room):
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wall_list.add(wall)
 
-
 class Room3(Room):
     def __init__(self):
         super().__init__()
@@ -108,8 +107,12 @@ class Room3(Room):
         for item in walls:
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wall_list.add(wall)
-        for x in range(100, 800, 100):
+        for x in range(100, 400, 100):
             for y in range(30, 451, 300):
+                wall = Wall(x, y, 20, 200, RED)
+                self.wall_list.add(wall)
+        for x in range(400, 800, 100):
+            for y in range(100, 480, 270):
                 wall = Wall(x, y, 20, 200, RED)
                 self.wall_list.add(wall)
         for x in range(150, 700, 100):
@@ -122,7 +125,7 @@ def main():
     print("Contact me on ladevweb@yahoo.com")
     screen = pygame.display.set_mode((800,600))
     pygame.display.set_caption('Maze Runner')
-    bg = pygame.image.load("bg.jpg").convert()
+    bg = pygame.image.load("./sprites/bg.jpg").convert()
     screen.blit(bg, (0,0))
     player = Player(50, 50)
     movingsprites = pygame.sprite.Group()
@@ -201,6 +204,7 @@ def main():
         pygame.display.flip()
         clock.tick(60)
     pygame.quit()
+    quit()
 
 if __name__ == "__main__":
     main()
